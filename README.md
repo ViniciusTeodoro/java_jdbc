@@ -1,2 +1,2 @@
 # java_jdbc
-JDBC Learning
+JDBC Learning basics
