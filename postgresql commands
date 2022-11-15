@@ -1,0 +1,27 @@
+
+
+CREATE DATABASE jdbc;
+
+create table users (id bigint not null, name character varying(255), email character varying(255), constraint users_pk primary key (id));
+
+create sequence users_seq increment 1 minvalue 1 maxvalue 9223372036854775807 start 1;
+ALTER TABLE users alter column id set default nextval('users_seq'::regclass);
+ALTER TABLE users add unique(id);
+
+insert into users (id, name, email) values (1, 'Alex', 'alex1@gmail.com');
+
+insert into users (id, name, email) values (2, 'Bianca', 'bianca1@gmail.com');
+
+create table phones (id bigint not null, number character varying(255) not null, type character varying(255) not null, user_id bigint not null, constraint phone_id primary key (id));
+
+alter table phones add foreign key (user_id) references users(id);
+
+create sequence phones_seq increment 1 minvalue 1 maxvalue 9223372036854775807 start 1;
+
+alter table phones alter column id set default nextval('phones_seq'::regclass);
+
+insert into phones (number, type, user_id) values ('(11) 99999-9999', 'cellphone', 1);
+
+insert into phones (number, type, user_id) values ('(11) 98888-8888', 'fix', 2);
+
+insert into phones (number, type, user_id) values ('(11) 97777-7777', 'cellphone', 3);
